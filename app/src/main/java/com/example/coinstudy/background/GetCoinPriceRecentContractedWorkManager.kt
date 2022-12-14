@@ -11,7 +11,6 @@ import java.lang.reflect.Parameter
 
 /**
  * 최근 거래된 코인 내역을 가져오는 워크 매니저
- * 2.관심있는 코인 각각의 가격 변동 정보를 가지고옴 (New API)
  * 3.DB에 가격 변동 정보를 저장
  * */
 class GetCoinPriceRecentContractedWorkManager(val context: Context, workerParameters: WorkerParameters)
@@ -37,6 +36,9 @@ class GetCoinPriceRecentContractedWorkManager(val context: Context, workerParame
 
         for (coinData in selectedCoinList) {
 
+            /**
+             * 2.관심있는 코인 각각의 가격 변동 정보를 가지고옴 (New API)
+             * */
             val recentCoinPrice = networkRepository.getRecentCoinPrice(coinData.coin_name)
 
             Timber.d(recentCoinPrice.toString())

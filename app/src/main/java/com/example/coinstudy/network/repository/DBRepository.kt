@@ -5,6 +5,7 @@ import com.example.coinstudy.db.CoinPriceDataBase
 import com.example.coinstudy.network.Api
 import com.example.coinstudy.network.RetrofitInstance
 import com.example.umc.db.InterestCoinEntity
+import com.example.umc.db.SelectedCoinPriceEntity
 
 class DBRepository {
 
@@ -21,4 +22,12 @@ class DBRepository {
         db.interestCoinDao().update(interestCoinEntity)
 
     fun getAllInterestSelectedCoinData() = db.interestCoinDao().getSelectedCoinList()
+
+    //RecentPrice
+    fun getAllCoinPriceData() = db.selectedCoinPriceDao().getAllData()
+
+    fun insertCoinPriceData(selectedCoinPriceEntity: SelectedCoinPriceEntity) =
+        db.selectedCoinPriceDao().insert(selectedCoinPriceEntity)
+
+    fun getOneSelectedCoinData(coinName : String) = db.selectedCoinPriceDao().getOneCoinData(coinName)
 }

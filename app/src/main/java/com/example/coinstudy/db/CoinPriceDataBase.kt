@@ -7,11 +7,15 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.umc.db.InterestCoinDao
 import com.example.umc.db.InterestCoinEntity
+import com.example.umc.db.SelectedCoinPriceDao
+import com.example.umc.db.SelectedCoinPriceEntity
 
-@Database(entities = [InterestCoinEntity::class], version = 2)
+@Database(entities = [InterestCoinEntity::class, SelectedCoinPriceEntity::class], version = 3)
+@TypeConverters(DateConverter::class)
 abstract class CoinPriceDataBase : RoomDatabase() {
 
     abstract fun interestCoinDao() : InterestCoinDao
+    abstract fun selectedCoinPriceDao() : SelectedCoinPriceDao
 
     companion object {
         @Volatile
