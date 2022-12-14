@@ -13,6 +13,7 @@ import com.example.umc.db.InterestCoinEntity
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class SelectViewModel : ViewModel() {
@@ -25,6 +26,10 @@ class SelectViewModel : ViewModel() {
     private val _currentPriceResult = MutableLiveData<List<CurrentPriceResult>>()
     val currentPriceResult : LiveData<List<CurrentPriceResult>>
         get() = _currentPriceResult
+
+    private val _saved = MutableLiveData<String>()
+    val saved : LiveData<String>
+        get() = _saved
 
     fun getCurrentCoinList() = viewModelScope.launch {
 
@@ -89,6 +94,14 @@ class SelectViewModel : ViewModel() {
             interestCoinEntity.let {
                 dbRepository.insertInterestCoinData(it)
             }
+        }
+
+        /**
+         * 백그라운드 스레드 문제 발생
+         * 따라서 withContext 사용
+         * */
+        withContext(Dispatchers.Main) {
+            _saved.value = "done"
         }
     }
 }
