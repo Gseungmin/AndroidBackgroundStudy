@@ -7,5 +7,7 @@ class NetworkRepository {
 
     private val client = RetrofitInstance.getInstance().create(Api::class.java)
 
-    suspend fun getCurrentCoinList() = client.getCurrentCoinList();
+    suspend fun getCurrentCoinList() = client.getCurrentCoinList()
+
+    suspend fun getRecentCoinPrice(coin : String) = client.getRecentCoinPrice(coin)
 }
