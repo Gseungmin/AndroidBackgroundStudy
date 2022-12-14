@@ -8,7 +8,7 @@ import androidx.room.TypeConverters
 import com.example.umc.db.InterestCoinDao
 import com.example.umc.db.InterestCoinEntity
 
-@Database(entities = [InterestCoinEntity::class], version = 1)
+@Database(entities = [InterestCoinEntity::class], version = 2)
 abstract class CoinPriceDataBase : RoomDatabase() {
 
     abstract fun interestCoinDao() : InterestCoinDao

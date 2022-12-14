@@ -12,7 +12,7 @@ interface InterestCoinDao {
      * 즉 db에 데이터가 변경될때 변경 사항 감지하기 좋음
      * */
     @Query("SELECT * FROM interest_coin_table")
-    fun getAllData() : Flow<InterestCoinEntity>
+    fun getAllData() : Flow<List<InterestCoinEntity>>
 
     /**
      * 사용자가 선택한 데이터만 가지고 옴
