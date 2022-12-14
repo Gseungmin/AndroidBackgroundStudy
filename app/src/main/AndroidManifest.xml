@@ -14,12 +14,20 @@
         android:theme="@style/Theme.CoinStudy"
         tools:targetApi="31">
         <activity
+            android:name=".view.SelectActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".IntroActivity"
             android:exported="true"
             android:theme="@style/Theme.CoinStudy.Splash">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +37,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

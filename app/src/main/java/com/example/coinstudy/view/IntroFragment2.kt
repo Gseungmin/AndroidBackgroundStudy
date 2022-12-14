@@ -1,10 +1,12 @@
 package com.example.coinstudy.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.example.coinstudy.R
 import com.example.coinstudy.databinding.FragmentIntro1Binding
 import com.example.coinstudy.databinding.FragmentIntro2Binding
@@ -25,6 +27,15 @@ class IntroFragment2 : Fragment() {
 
         _binding = FragmentIntro2Binding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.nextBtn.setOnClickListener {
+            val intent = Intent(requireContext(), SelectActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     //viewBinding이 더이상 필요 없을 경우 null 처리 필요
