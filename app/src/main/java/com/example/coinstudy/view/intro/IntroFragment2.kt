@@ -1,4 +1,4 @@
-package com.example.coinstudy.view
+package com.example.coinstudy.view.intro
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,10 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import com.example.coinstudy.R
-import com.example.coinstudy.databinding.FragmentIntro1Binding
 import com.example.coinstudy.databinding.FragmentIntro2Binding
+import com.example.coinstudy.view.SelectActivity
 
 class IntroFragment2 : Fragment() {
 
