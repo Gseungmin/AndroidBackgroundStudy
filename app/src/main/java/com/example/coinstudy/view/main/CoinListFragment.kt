@@ -8,9 +8,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.coinstudy.R
 import com.example.coinstudy.databinding.FragmentCoinListBinding
 import com.example.coinstudy.databinding.FragmentIntro1Binding
+import com.example.coinstudy.view.adapter.CoinListRVAdapter
 import com.example.umc.db.InterestCoinEntity
 import timber.log.Timber
 
@@ -51,7 +53,38 @@ class CoinListFragment : Fragment() {
                     unSelectedList.add(item)
                 }
             }
+
+            setSelectedListRV()
         })
+    }
+
+    private fun setSelectedListRV() {
+
+        val selectedCoinRVAdapter = CoinListRVAdapter(requireContext(), selectedList)
+        binding.selectedCoinRV.adapter = selectedCoinRVAdapter
+        binding.selectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
+
+        /**
+         * 클릭하면 기능 정의
+         * */
+        selectedCoinRVAdapter.itemClick = object : CoinListRVAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                viewModel.updateInterestCoinData(selectedList[position])
+            }
+        }
+
+        val unSelectedCoinRVAdapter = CoinListRVAdapter(requireContext(), unSelectedList)
+        binding.unSelectedCoinRV.adapter = unSelectedCoinRVAdapter
+        binding.unSelectedCoinRV.layoutManager = LinearLayoutManager(requireContext())
+
+        /**
+         * 클릭하면 기능 정의
+         * */
+        unSelectedCoinRVAdapter.itemClick = object : CoinListRVAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
+                viewModel.updateInterestCoinData(unSelectedList[position])
+            }
+        }
     }
 
     //viewBinding이 더이상 필요 없을 경우 null 처리 필요
