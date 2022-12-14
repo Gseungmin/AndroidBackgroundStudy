@@ -41,6 +41,9 @@ class SelectActivity : AppCompatActivity() {
         })
 
         binding.laterTextArea.setOnClickListener {
+
+            viewModel.setUpFirstFlag()
+
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
