@@ -1,10 +1,12 @@
 package com.example.coinstudy.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coinstudy.MainActivity
 import com.example.coinstudy.R
 import com.example.coinstudy.databinding.ActivityIntroBinding
 import com.example.coinstudy.databinding.ActivitySelectBinding
@@ -37,5 +39,10 @@ class SelectActivity : AppCompatActivity() {
 
             Timber.d(it.toString())
         })
+
+        binding.laterTextArea.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
