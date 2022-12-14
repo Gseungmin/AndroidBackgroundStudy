@@ -1,10 +1,12 @@
 package com.example.coinstudy
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.coinstudy.databinding.ActivityMainBinding
+import com.example.coinstudy.view.setting.SettingActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,5 +22,10 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.fragmentContainerView)
 
         bottomNavigationView.setupWithNavController(navController)
+
+        binding.setting.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
+            startActivity(intent)
+        }
     }
 }
