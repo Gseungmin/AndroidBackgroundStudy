@@ -7,15 +7,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.coinstudy.dataModel.CurrentPrice
 import com.example.coinstudy.dataModel.CurrentPriceResult
 import com.example.coinstudy.dataStore.MyDataStore
-import com.example.coinstudy.network.model.CurrentPriceList
+import com.example.coinstudy.network.repository.DBRepository
 import com.example.coinstudy.network.repository.NetworkRepository
+import com.example.umc.db.InterestCoinEntity
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class SelectViewModel : ViewModel() {
 
     private val networkRepository = NetworkRepository()
+    private val dbRepository = DBRepository()
 
     private lateinit var currentPriceResultList : ArrayList<CurrentPriceResult>
 
@@ -50,5 +53,42 @@ class SelectViewModel : ViewModel() {
 
     fun setUpFirstFlag() = viewModelScope.launch {
         MyDataStore().setupFirstData()
+    }
+
+    /**
+     * DB에 데이터 저장
+     * Dispatcher IO는 외부 디스크 혹은 네트워크 I/O를 실행하는데 최적화
+     */
+    fun saveSelectedCoinList(selectedCoinList: ArrayList<String>) = viewModelScope.launch(Dispatchers.IO) {
+
+        // 1.전체 코인 데이터 가지고오기
+        for (coin in currentPriceResultList) {
+
+            // 2.내가 선택한 코인인지 확인
+            //selectRVAdapter에 선택된 코인 저장되어 있음
+            val selected = selectedCoinList.contains(coin.coinName)
+
+            val interestCoinEntity = InterestCoinEntity(
+                0,
+                coin.coinName,
+                coin.coinInfo.opening_price,
+                coin.coinInfo.closing_price,
+                coin.coinInfo.min_price,
+                coin.coinInfo.max_price,
+                coin.coinInfo.units_traded,
+                coin.coinInfo.acc_trade_value,
+                coin.coinInfo.prev_closing_price,
+                coin.coinInfo.units_traded_24H,
+                coin.coinInfo.acc_trade_value_24H,
+                coin.coinInfo.fluctate_24H,
+                coin.coinInfo.fluctate_rate_24H,
+                selected
+            )
+
+            // 3.저장
+            interestCoinEntity.let {
+                dbRepository.insertInterestCoinData(it)
+            }
+        }
     }
 }

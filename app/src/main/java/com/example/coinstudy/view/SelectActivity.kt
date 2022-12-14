@@ -1,14 +1,10 @@
 package com.example.coinstudy.view
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.coinstudy.MainActivity
-import com.example.coinstudy.R
-import com.example.coinstudy.databinding.ActivityIntroBinding
 import com.example.coinstudy.databinding.ActivitySelectBinding
 import com.example.coinstudy.view.adapter.SelectRVAdapter
 import timber.log.Timber
@@ -43,9 +39,10 @@ class SelectActivity : AppCompatActivity() {
         binding.laterTextArea.setOnClickListener {
 
             viewModel.setUpFirstFlag()
+            viewModel.saveSelectedCoinList(selectRVAdapter.selectedCoinList)
 
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, MainActivity::class.java)
+//            startActivity(intent)
         }
     }
 }
