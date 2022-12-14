@@ -10,6 +10,7 @@ import com.example.coinstudy.dataStore.MyDataStore
 import com.example.coinstudy.network.model.CurrentPriceList
 import com.example.coinstudy.network.repository.NetworkRepository
 import com.google.gson.Gson
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -21,6 +22,8 @@ class IntroViewModel : ViewModel() {
         get() = _first
 
     fun checkFirstFlag() = viewModelScope.launch {
+
+        delay(1000)
 
         val getData = MyDataStore().getFirstData()
 
