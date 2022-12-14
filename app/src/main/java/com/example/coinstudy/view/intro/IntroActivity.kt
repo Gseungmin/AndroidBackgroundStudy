@@ -1,10 +1,13 @@
 package com.example.coinstudy.view.intro
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.ViewModel
+import com.example.coinstudy.MainActivity
 import com.example.coinstudy.databinding.ActivityIntroBinding
 import com.example.coinstudy.databinding.ActivityMainBinding
 import timber.log.Timber
@@ -26,5 +29,16 @@ class IntroActivity : AppCompatActivity() {
         Timber.d("onCreate")
 
         viewModel.checkFirstFlag()
+
+        viewModel.first.observe(this, {
+            if (it) {
+                //처음 접속 유저가 아님
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+            } else {
+                //처음 접속 유저
+                binding.fragmentContainerView.visibility = View.VISIBLE
+            }
+        })
     }
 }
