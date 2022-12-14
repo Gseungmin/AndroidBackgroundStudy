@@ -1,5 +1,7 @@
 package com.example.coinstudy.view
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.coinstudy.dataModel.CurrentPrice
@@ -15,6 +17,10 @@ class SelectViewModel : ViewModel() {
     private val networkRepository = NetworkRepository()
 
     private lateinit var currentPriceResultList : ArrayList<CurrentPriceResult>
+
+    private val _currentPriceResult = MutableLiveData<List<CurrentPriceResult>>()
+    val currentPriceResult : LiveData<List<CurrentPriceResult>>
+        get() = _currentPriceResult
 
     fun getCurrentCoinList() = viewModelScope.launch {
 
@@ -32,10 +38,12 @@ class SelectViewModel : ViewModel() {
                 val currentPriceResult = CurrentPriceResult(coin.key, gsonFromJson)
 
                 currentPriceResultList.add(currentPriceResult)
-                
+
             } catch (e: java.lang.Exception) {
                 Timber.d(e.toString())
             }
         }
+
+        _currentPriceResult.value = currentPriceResultList
     }
 }

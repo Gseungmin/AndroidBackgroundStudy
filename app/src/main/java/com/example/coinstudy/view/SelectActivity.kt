@@ -24,5 +24,8 @@ class SelectActivity : AppCompatActivity() {
         setContentView(view)
 
         viewModel.getCurrentCoinList()
+        viewModel.currentPriceResult.observe(this, {
+            Timber.d(it.toString())
+        })
     }
 }
