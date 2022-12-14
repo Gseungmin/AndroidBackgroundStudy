@@ -22,5 +22,7 @@ class SelectActivity : AppCompatActivity() {
         binding = ActivitySelectBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        viewModel.getCurrentCoinList()
     }
 }
