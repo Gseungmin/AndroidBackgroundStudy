@@ -10,7 +10,7 @@ import com.example.umc.db.InterestCoinEntity
 import com.example.umc.db.SelectedCoinPriceDao
 import com.example.umc.db.SelectedCoinPriceEntity
 
-@Database(entities = [InterestCoinEntity::class, SelectedCoinPriceEntity::class], version = 3)
+@Database(entities = [InterestCoinEntity::class, SelectedCoinPriceEntity::class], version = 4)
 @TypeConverters(DateConverter::class)
 abstract class CoinPriceDataBase : RoomDatabase() {
 
